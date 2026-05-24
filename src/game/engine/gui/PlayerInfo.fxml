@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+
+
+
+<!--  hena el bar beta3 el player info only wel changing pictures in the player info controle -->
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="game.engine.gui.PlayerInfoController"
+      spacing="8" prefWidth="280"
+      style="-fx-background-color: #1e1e2e; -fx-padding: 12; -fx-background-radius: 10;">
+
+    <!-- Top row: portrait in corner + name/role -->
+    <HBox spacing="12" alignment="CENTER_LEFT">
+
+        <!-- Monster portrait — wrapped in StackPane with background -->
+        <StackPane prefWidth="70" prefHeight="70" minWidth="70" minHeight="70"
+                   style="-fx-background-color: #2a2a3a;
+                          -fx-background-radius: 35;
+                          -fx-border-color: #ffd24a;
+                          -fx-border-width: 2;
+                          -fx-border-radius: 35;">
+            <ImageView fx:id="monsterPortrait"
+                       fitWidth="62" fitHeight="62"
+                       preserveRatio="true" smooth="true"/>
+        </StackPane>
+
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label fx:id="nameLabel" text="Monster Name"
+                   style="-fx-text-fill: #ffffff; -fx-font-size: 15px; -fx-font-weight: bold;"
+                   wrapText="true"/>
+            <Label fx:id="roleLabel" text="ROLE"
+                   style="-fx-text-fill: #cccccc; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+            <Label fx:id="typeLabel" text="Type"
+                   style="-fx-text-fill: #aaaaaa; -fx-font-size: 11px; -fx-font-style: italic;"/>
+        </VBox>
+    </HBox>
+
+    <Region prefHeight="2"/>
+
+    <Label fx:id="currentRoleLabel" text="CURRENT: -"
+           style="-fx-text-fill: #aaaaaa; -fx-font-size: 11px;"/>
+
+    <HBox spacing="6" alignment="CENTER_LEFT">
+        <Label text="Energy:" style="-fx-text-fill: #cccccc; -fx-font-size: 11px;"/>
+        <Label fx:id="energyLabel" text="0 / 1000"
+               style="-fx-text-fill: #ffffff; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <ProgressBar fx:id="energyBar" progress="0.1" prefWidth="240" prefHeight="14"/>
+
+    <Label fx:id="positionLabel" text="Cell 0"
+           style="-fx-text-fill: #cccccc; -fx-font-size: 11px;"/>
+
+    <Label fx:id="statusLabel" text="No active effects"
+           style="-fx-text-fill: #ffcc66; -fx-font-size: 10px;"
+           wrapText="true"/>
+
+</VBox>

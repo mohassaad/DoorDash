@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.transform.Rotate?>
+
+
+<!-- with scenebuilder a el big cont.. -->
+<!-- lazem te3mel link ma3 el controller -->
+
+
+<AnchorPane prefHeight="0" prefWidth="0.0" 
+
+			
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="game.engine.gui.StartScreenController">
+
+
+    <!-- ====== LAYER 1: BACKGROUND ====== -->
+    <ImageView fitWidth="1280" fitHeight="720" preserveRatio="false"
+               AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+        <image>
+        
+        <!-- el background from manus -->
+           <Image url="@/images/YeagA0by5bepSwcmS6KoRG_1778792554000_na1fn_ZG9vcl9kYXNoX2JhY2tncm91bmRfb25seQ.png"/>
+        </image>
+    </ImageView>
+
+
+    <!-- Dark overlay for readability -->
+    <AnchorPane prefWidth="1280" prefHeight="720"
+                style="-fx-background-color: rgba(0,0,0,0.25);"
+                AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"/>
+
+    <!-- ====== LAYER 2: LOGO (TOP CENTER) ====== -->
+    <ImageView fitWidth="540" preserveRatio="true"
+               AnchorPane.topAnchor="20" AnchorPane.leftAnchor="370">
+        <image>
+            <Image url="@/images/doordashpic.png"/>
+        </image>
+        <effect>
+            <DropShadow color="#000000" radius="20" spread="0.2" offsetY="4"/>
+        </effect>
+    </ImageView>
+
+    <!-- ====== LAYER 3: SULLEY (BLUE MONSTER) ====== -->
+    <StackPane fx:id="sulleyContainer"
+               AnchorPane.topAnchor="180" AnchorPane.leftAnchor="420"
+               prefWidth="360" prefHeight="440">
+
+        <ImageView fx:id="sulleyImage" fitWidth="340" preserveRatio="true"
+                   style="-fx-cursor: hand;">
+            <image>
+                <Image url="@/images/monster.png"/>
+            </image>
+            <transforms>
+                <Rotate angle="0" pivotX="170" pivotY="200"/>
+            </transforms>
+            <effect>
+                <DropShadow fx:id="sulleyGlow" color="#7fbfff" radius="0" spread="0.0"/>
+            </effect>
+        </ImageView>
+
+        <!-- SCARER BADGE -->
+        <!-- the mettalic font can be made with many layers!!  -->
+        <StackPane StackPane.alignment="BOTTOM_CENTER" translateY="200">
+            <effect>
+                <DropShadow color="#1a3a6e" radius="12" offsetY="3" spread="0.3"/>
+            </effect>
+
+            <Rectangle width="160" height="42" arcWidth="12" arcHeight="12"
+                       fill="linear-gradient(from 0% 0% to 0% 100%, #2a6f9c, #1b4d7a)"
+                       stroke="#6aafff" strokeWidth="2">
+                <effect>
+                    <DropShadow color="#2a6f9c" radius="8" spread="0.5"/>
+                </effect>
+            </Rectangle>
+
+            <Rectangle width="152" height="34" arcWidth="8" arcHeight="8"
+                       fill="linear-gradient(from 0% 0% to 0% 100%, rgba(255,255,255,0.25), rgba(255,255,255,0.05))"
+                       stroke="transparent"/>
+
+            <!-- Chrome blue text layers -->
+            <Label text="SCARER" textFill="#000000"
+                   style="-fx-font-family: 'Impact'; -fx-font-size: 20px;"
+                   translateX="2" translateY="3"/>
+
+            <Label text="SCARER" textFill="#050e1a"
+                   style="-fx-font-family: 'Impact'; -fx-font-size: 20px;"
+                   translateX="1" translateY="2"/>
+
+            <Label text="SCARER" textFill="#aad4ff"
+                   style="-fx-font-family: 'Impact'; -fx-font-size: 20px;">
+                <effect>
+                    <DropShadow color="#1b5a8a" radius="4" spread="0.3"/>
+                </effect>
+            </Label>
+
+            <Circle radius="4" fill="#ffffff"
+                    StackPane.alignment="CENTER_LEFT" translateX="-60">
+                <effect><DropShadow color="#6aafff" radius="3"/></effect>
+            </Circle>
+            <Circle radius="4" fill="#ffffff"
+                    StackPane.alignment="CENTER_RIGHT" translateX="60">
+                <effect><DropShadow color="#6aafff" radius="3"/></effect>
+            </Circle>
+        </StackPane>
+    </StackPane>
+
+<!-- ====== LAYER 4: MIKE (GREEN MONSTER) ====== -->
+    <StackPane fx:id="mikeContainer"
+               AnchorPane.topAnchor="270" AnchorPane.leftAnchor="800"
+               prefWidth="300" prefHeight="340">
+
+        <ImageView fx:id="mikeImage" fitWidth="300" preserveRatio="true"
+                   style="-fx-cursor: hand;">
+            <image>
+               <Image url="@/images/Adobe Express - file (1).png"/>
+            </image>
+            <transforms>
+                <Rotate angle="0" pivotX="150" pivotY="170"/>
+            </transforms>
+            <effect>
+                <DropShadow fx:id="mikeGlow" color="#ff6347" radius="0" spread="0.0"/>
+            </effect>
+        </ImageView>
+
+        <!-- LAUGHER BADGE -->
+        <StackPane StackPane.alignment="BOTTOM_CENTER" translateY="170">
+            <effect>
+                <DropShadow color="#8b3a1a" radius="12" offsetY="3" spread="0.3"/>
+            </effect>
+
+            <Rectangle width="160" height="42" arcWidth="12" arcHeight="12"
+                       fill="linear-gradient(from 0% 0% to 0% 100%, #d4a030, #a07020)"
+                       stroke="#ffd24a" strokeWidth="2">
+                <effect>
+                    <DropShadow color="#ff6347" radius="0" spread="0.5"/>
+                </effect>
+            </Rectangle>
+
+            <Rectangle width="152" height="34" arcWidth="8" arcHeight="8"
+                       fill="linear-gradient(from 0% 0% to 0% 100%, rgba(255,255,255,0.25), rgba(255,255,255,0.05))"
+                       stroke="transparent"/>
+		
+		<!-- hena lazem css for the special styling w geeb el hex color mn google -->
+            <!-- Chrome gold text layers -->
+            <Label text="LAUGHER" textFill="#000000"
+                   style="-fx-font-family: 'Impact'; -fx-font-size: 20px;"
+                   translateX="2" translateY="3"/>
+
+            <Label text="LAUGHER" textFill="#1a0f00"
+                   style="-fx-font-family: 'Impact'; -fx-font-size: 20px;"
+                   translateX="1" translateY="2"/>
+
+            <Label text="LAUGHER" textFill="#ffd87a"
+                   style="-fx-font-family: 'Impact'; -fx-font-size: 20px;">
+                <effect>
+                    <DropShadow color="#a07020" radius="4" spread="0.3"/>
+                </effect>
+            </Label>
+
+            <Circle radius="4" fill="#ffffff"
+                    StackPane.alignment="CENTER_LEFT" translateX="-60">
+                <effect><DropShadow color="#ffd24a" radius="3"/></effect>
+            </Circle>
+            <Circle radius="4" fill="#ffffff"
+                    StackPane.alignment="CENTER_RIGHT" translateX="60">
+                <effect><DropShadow color="#ffd24a" radius="3"/></effect>
+            </Circle>
+        </StackPane>
+    </StackPane>
+
+    <!-- ====== LAYER 5: LEFT-SIDE MENU BUTTONS ====== -->
+    <!-- el unicodes geebo mn ay mawqe3 3ady -->
+    <VBox fx:id="menuBox" spacing="14"
+          AnchorPane.topAnchor="220" AnchorPane.leftAnchor="40">
+
+        <Button fx:id="startButton" text="▶   START GAME"
+                prefWidth="320" prefHeight="58"
+                alignment="CENTER_LEFT"
+                style="-fx-background-color: linear-gradient(to bottom, #4ade50 0%, #16a34a 100%);
+                       -fx-background-radius: 30;
+                       -fx-padding: 0 24 0 24;
+                       -fx-font-family: 'Impact';
+                       -fx-font-size: 22px;
+                       -fx-text-fill: white;
+                       -fx-cursor: hand;
+                       -fx-border-color: rgba(255,255,255,0.5);
+                       -fx-border-width: 2;
+                       -fx-border-radius: 30;">
+            <effect>
+                <DropShadow color="#4ade50" radius="18" spread="0.35"/>
+            </effect>
+        </Button>
+
+        <Button fx:id="optionsButton" text="⚙   OPTIONS"
+                prefWidth="320" prefHeight="58"
+                alignment="CENTER_LEFT"
+                style="-fx-background-color: rgba(20, 20, 40, 0.75);
+                       -fx-background-radius: 30;
+                       -fx-padding: 0 24 0 24;
+                       -fx-font-family: 'Impact';
+                       -fx-font-size: 20px;
+                       -fx-text-fill: #e0d8ff;
+                       -fx-cursor: hand;
+                       -fx-border-color: rgba(255,255,255,0.3);
+                       -fx-border-width: 1.5;
+                       -fx-border-radius: 30;"/>
+
+        <Button fx:id="exitButton" text="⛌   EXIT"
+                prefWidth="320" prefHeight="58"
+                alignment="CENTER_LEFT"
+                style="-fx-background-color: rgba(20, 20, 40, 0.75);
+                       -fx-background-radius: 30;
+                       -fx-padding: 0 24 0 24;
+                       -fx-font-family: 'Impact';
+                       -fx-font-size: 20px;
+                       -fx-text-fill: #e0d8ff;
+                       -fx-cursor: hand;
+                       -fx-border-color: rgba(255,255,255,0.3);
+                       -fx-border-width: 1.5;
+                       -fx-border-radius: 30;"/>
+    </VBox>
+
+    <!-- ====== LAYER 6: TOP-RIGHT MUSIC TOGGLE ====== -->
+    
+    <!-- el mute button doesn;t  -->
+    <HBox spacing="10"
+          AnchorPane.topAnchor="20" AnchorPane.rightAnchor="20">
+        <Button fx:id="musicToggleButton" text="♫"
+                prefWidth="50" prefHeight="50"
+                style="-fx-background-color: rgba(20, 20, 40, 0.75);
+                       -fx-background-radius: 25;
+                       -fx-font-size: 22px;
+                       -fx-text-fill: #ffffff;
+                       -fx-cursor: hand;
+                       -fx-border-color: rgba(255,255,255,0.4);
+                       -fx-border-width: 1.5;
+                       -fx-border-radius: 25;"/>
+    </HBox>
+
+</AnchorPane>

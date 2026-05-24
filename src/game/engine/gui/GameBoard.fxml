@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Outer StackPane so overlays sit on top of everything -->
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="game.engine.gui.GameBoardController">
+
+    <!-- ====== MAIN GAME LAYOUT ====== -->
+    <BorderPane style="-fx-background-color: linear-gradient(to bottom right, #0a0716, #18102e, #0e0a1f);">
+
+        <!-- TOP -->
+        <top>
+            <HBox spacing="20" alignment="CENTER"
+                  style="-fx-padding: 10; -fx-background-color: rgba(0,0,0,0.3);">
+                <Label text="DooR DasH"
+                       style="-fx-font-family: 'Impact'; -fx-font-size: 28px; -fx-text-fill: #ffd24a;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="currentTurnLabel" text="Turn:"
+                       style="-fx-font-family: 'Impact'; -fx-font-size: 22px; -fx-text-fill: #ffffff;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="diceResultLabel" text="Roll the dice"
+                       style="-fx-text-fill: #cccccc; -fx-font-size: 14px;"/>
+            </HBox>
+        </top>
+
+    <!-- LEFT: Player info -->
+<left>
+    <VBox spacing="8" alignment="TOP_CENTER"
+          style="-fx-padding: 16;" prefWidth="310" minWidth="280">
+
+        <!-- Player info loaded dynamically by controller -->
+        <VBox fx:id="playerInfoContainer" spacing="8" alignment="TOP_CENTER"/>
+
+        <!-- Legend image below player info -->
+        <ImageView fitWidth="278" preserveRatio="true" smooth="true">
+            <image>
+                <Image url="@/images/legend.png"/>
+            </image>
+        </ImageView>
+
+    </VBox>
+</left>
+
+        <!-- CENTER: Board with metallic frame -->
+        <center>
+            <ScrollPane fitToWidth="true" fitToHeight="true"
+                        hbarPolicy="NEVER" vbarPolicy="NEVER"
+                        style="-fx-background: transparent;
+                               -fx-background-color: transparent;
+                               -fx-border-color: transparent;">
+                <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;" VBox.vgrow="ALWAYS">
+
+                    <!-- METALLIC FRAME -->
+                    <VBox alignment="CENTER"
+                          maxWidth="-Infinity" maxHeight="-Infinity"
+                          style="-fx-background-color:
+                                     linear-gradient(to bottom right,
+                                         #d8dde4 0%, #9aa0a8 25%,
+                                         #5a6068 50%, #9aa0a8 75%,
+                                         #d8dde4 100%);
+                                 -fx-background-radius: 16;
+                                 -fx-padding: 22;
+                                 -fx-border-color: #2a2a2a;
+                                 -fx-border-width: 3;
+                                 -fx-border-radius: 16;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 25, 0.4, 0, 6);">
+
+                        <!-- Inner dark bezel -->
+                        <VBox alignment="CENTER"
+                              maxWidth="-Infinity" maxHeight="-Infinity"
+                              style="-fx-background-color:
+                                         linear-gradient(to bottom,
+                                             #1a1a1a 0%, #3a3a3a 50%, #1a1a1a 100%);
+                                     -fx-padding: 8;
+                                     -fx-background-radius: 8;
+                                     -fx-border-color: #0a0a0a;
+                                     -fx-border-width: 2;
+                                     -fx-border-radius: 8;">
+
+                            <StackPane maxWidth="-Infinity" maxHeight="-Infinity">
+                                <GridPane fx:id="boardGrid"
+                                          style="-fx-background-color: #000000;"
+                                          hgap="0" vgap="0" alignment="CENTER"/>
+                                <Pane fx:id="transportOverlay"
+                                      mouseTransparent="true"
+                                      style="-fx-background-color: transparent;"/>
+                            </StackPane>
+                        </VBox>
+                    </VBox>
+
+                    <Label fx:id="messageLabel" text="Welcome!"
+                           style="-fx-text-fill: #ffffff; -fx-font-size: 14px; -fx-font-weight: bold;"
+                           wrapText="true"/>
+                </VBox>
+            </ScrollPane>
+        </center>
+
+        <!-- RIGHT: Opponent info + action log + DICE -->
+        <right>
+            <VBox spacing="10" style="-fx-padding: 16;" prefWidth="310" minWidth="280">
+                <VBox fx:id="opponentInfoContainer" spacing="8" alignment="TOP_CENTER"/>
+
+                <Label text="Action Log"
+                       style="-fx-text-fill: #ffffff; -fx-font-size: 13px; -fx-font-weight: bold;
+                              -fx-padding: 8 0 4 0;"/>
+                <ScrollPane fitToWidth="true"
+                            style="-fx-background-color: rgba(0,0,0,0.4); -fx-background: rgba(0,0,0,0.4);"
+                            prefHeight="180" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="cardHistoryContainer" spacing="3" style="-fx-padding: 6;"/>
+                </ScrollPane>
+
+                <!-- DICE DISPLAY -->
+                <Label text="DICE"
+                       style="-fx-text-fill: #ffd24a; -fx-font-family: 'Impact';
+                              -fx-font-size: 16px; -fx-padding: 10 0 4 0;"/>
+                <HBox spacing="12" alignment="CENTER"
+                      style="-fx-padding: 10;
+                             -fx-background-color: rgba(0,0,0,0.45);
+                             -fx-background-radius: 10;
+                             -fx-border-color: rgba(255,210,74,0.5);
+                             -fx-border-width: 2;
+                             -fx-border-radius: 10;">
+                    <StackPane fx:id="dieFace1" prefWidth="80" prefHeight="80"
+                               style="-fx-background-color: linear-gradient(to bottom right, #ffffff, #e0e0e0);
+                                      -fx-background-radius: 12;
+                                      -fx-border-color: #333333;
+                                      -fx-border-width: 2;
+                                      -fx-border-radius: 10;">
+                        <Label fx:id="dieLabel1" text="?"
+                               style="-fx-font-family: 'Impact'; -fx-font-size: 36px; -fx-text-fill: #1a1a1a;"/>
+                    </StackPane>
+                </HBox>
+            </VBox>
+        </right>
+
+        <!-- BOTTOM: Action buttons -->
+        <bottom>
+            <HBox spacing="14" alignment="CENTER"
+                  minHeight="80" prefHeight="80"
+                  style="-fx-padding: 14; -fx-background-color: rgba(0,0,0,0.5);">
+
+                <Button fx:id="rollButton" text="🎲  ROLL DICE"
+                        onAction="#onRollDice"
+                        prefWidth="200" prefHeight="50" minHeight="50"
+                        style="-fx-background-color: linear-gradient(to bottom, #4ade50, #16a34a);
+                               -fx-text-fill: white;
+                               -fx-font-family: 'Impact'; -fx-font-size: 18px;
+                               -fx-background-radius: 25; -fx-cursor: hand;
+                               -fx-border-color: rgba(255,255,255,0.5);
+                               -fx-border-width: 2; -fx-border-radius: 25;
+                               -fx-effect: dropshadow(gaussian, #4ade50, 18, 0.35, 0, 0);"/>
+
+                <Button fx:id="powerupButton" text="⚡  POWERUP (500)"
+                        onAction="#onUsePowerup"
+                        prefWidth="220" prefHeight="50" minHeight="50"
+                        style="-fx-background-color: linear-gradient(to bottom, #ffd773, #f0a832);
+                               -fx-text-fill: #1a0f30;
+                               -fx-font-family: 'Impact'; -fx-font-size: 16px;
+                               -fx-background-radius: 25; -fx-cursor: hand;
+                               -fx-border-color: rgba(255,255,255,0.4);
+                               -fx-border-width: 2; -fx-border-radius: 25;
+                               -fx-effect: dropshadow(gaussian, #ffc857, 18, 0.35, 0, 0);"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button text="RULES" onAction="#onShowRules"
+                        prefHeight="50" minHeight="50" prefWidth="100"
+                        style="-fx-background-color: rgba(20, 20, 40, 0.7);
+                               -fx-text-fill: #b9a8e8;
+                               -fx-font-family: 'Verdana'; -fx-font-size: 13px;
+                               -fx-font-weight: bold; -fx-padding: 0 18 0 18;
+                               -fx-border-color: rgba(255,255,255,0.4);
+                               -fx-border-width: 1.5; -fx-border-radius: 25;
+                               -fx-background-radius: 25; -fx-cursor: hand;"/>
+
+                <Button text="EXIT" onAction="#onExit"
+                        prefHeight="50" minHeight="50" prefWidth="100"
+                        style="-fx-background-color: rgba(20, 20, 40, 0.7);
+                               -fx-text-fill: #b9a8e8;
+                               -fx-font-family: 'Verdana'; -fx-font-size: 13px;
+                               -fx-font-weight: bold; -fx-padding: 0 18 0 18;
+                               -fx-border-color: rgba(255,255,255,0.4);
+                               -fx-border-width: 1.5; -fx-border-radius: 25;
+                               -fx-background-radius: 25; -fx-cursor: hand;"/>
+            </HBox>
+        </bottom>
+
+    </BorderPane>
+
+    <!-- ====== CARD POPUP OVERLAY (sits on top, doesn't leave fullscreen) ====== -->
+    <StackPane fx:id="cardPopupOverlay"
+               visible="false" managed="false"
+               style="-fx-background-color: rgba(0,0,0,0.78);">
+
+        <VBox alignment="CENTER" spacing="18"
+              maxWidth="480" maxHeight="340"
+              style="-fx-background-color: #1e1e2e;
+                     -fx-background-radius: 16;
+                     -fx-border-color: #ffd24a;
+                     -fx-border-width: 3;
+                     -fx-border-radius: 16;
+                     -fx-padding: 36;
+                     -fx-effect: dropshadow(gaussian, rgba(255,210,74,0.55), 30, 0.4, 0, 0);">
+
+            <Label text="🎴 CARD DRAWN!"
+                   style="-fx-text-fill: #ffd24a;
+                          -fx-font-family: 'Impact';
+                          -fx-font-size: 24px;"/>
+
+            <Label fx:id="cardPopupTitle" text=""
+                   style="-fx-text-fill: #ffffff;
+                          -fx-font-family: 'Impact';
+                          -fx-font-size: 18px;"
+                   wrapText="true" textAlignment="CENTER" maxWidth="400"/>
+
+            <Label fx:id="cardPopupBody" text=""
+                   style="-fx-text-fill: #cccccc; -fx-font-size: 13px;"
+                   wrapText="true" textAlignment="CENTER" maxWidth="400"/>
+
+            <Button text="OK — Continue"
+                    onAction="#onCloseCardPopup"
+                    prefWidth="200" prefHeight="46"
+                    style="-fx-background-color: linear-gradient(to bottom, #ffd773, #f0a832);
+                           -fx-text-fill: #1a0f30;
+                           -fx-font-family: 'Impact'; -fx-font-size: 16px;
+                           -fx-background-radius: 23; -fx-cursor: hand;
+                           -fx-border-color: rgba(255,255,255,0.4);
+                           -fx-border-width: 2; -fx-border-radius: 23;"/>
+        </VBox>
+    </StackPane>
+
+    <!-- ====== GAME END OVERLAY (sits on top, doesn't leave fullscreen) ====== -->
+    <StackPane fx:id="gameEndOverlay"
+               visible="false" managed="false"
+               style="-fx-background-color: rgba(0,0,0,0.82);">
+
+        <VBox alignment="CENTER" spacing="18"
+              maxWidth="540" maxHeight="400"
+              style="-fx-background-color: #1e1e2e;
+                     -fx-background-radius: 16;
+                     -fx-border-color: #4ade50;
+                     -fx-border-width: 3;
+                     -fx-border-radius: 16;
+                     -fx-padding: 40;
+                     -fx-effect: dropshadow(gaussian, rgba(74,222,80,0.55), 30, 0.4, 0, 0);">
+
+            <Label fx:id="gameEndTitle" text="Game Over!"
+                   style="-fx-text-fill: #ffd24a;
+                          -fx-font-family: 'Impact'; -fx-font-size: 30px;"
+                   wrapText="true" textAlignment="CENTER"/>
+
+            <Label fx:id="gameEndBody" text=""
+                   style="-fx-text-fill: #dddddd; -fx-font-size: 14px;"
+                   wrapText="true" maxWidth="460" textAlignment="CENTER"/>
+
+            <HBox spacing="18" alignment="CENTER">
+                <Button text="🏠  Return to Start"
+                        onAction="#onGameEndReturn"
+                        prefWidth="210" prefHeight="48"
+                        style="-fx-background-color: linear-gradient(to bottom, #4ade50, #16a34a);
+                               -fx-text-fill: white;
+                               -fx-font-family: 'Impact'; -fx-font-size: 16px;
+                               -fx-background-radius: 24; -fx-cursor: hand;
+                               -fx-border-color: rgba(255,255,255,0.4);
+                               -fx-border-width: 2; -fx-border-radius: 24;"/>
+                <Button text="❌  Exit"
+                        onAction="#onGameEndExit"
+                        prefWidth="140" prefHeight="48"
+                        style="-fx-background-color: rgba(20,20,40,0.8);
+                               -fx-text-fill: #e0d8ff;
+                               -fx-font-family: 'Impact'; -fx-font-size: 16px;
+                               -fx-background-radius: 24; -fx-cursor: hand;
+                               -fx-border-color: rgba(255,255,255,0.3);
+                               -fx-border-width: 1.5; -fx-border-radius: 24;"/>
+            </HBox>
+        </VBox>
+    </StackPane>
+
+</StackPane>
